@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-us" class="theme-base-0d">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      
+        A/B Testing Project &middot; Eleanor Fleming
+      
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky" style="position: relative; top: -40px;">
+    <!-- Add Headshot Image -->
+    <img src="/public/images/headshot_zoomed_2.png" alt="Eleanor Fleming" class="headshot">
+    <!-- End Headshot Image -->
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Eleanor Fleming
+        </a>
+      </h1>
+      <p class="lead">Product Manager</p>
+    </div>
+
+    <!-- Style headshot -->
+    <style>
+      .headshot {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        top: -20px;
+        margin: 20px 100px 10px auto; /* Using auto for left/right margins to center */
+        object-fit: cover;
+        object-position: center;
+      }
+      .sidebar-sticky {
+        top: 0 !important;
+      }
+      .sidebar {
+        background-color: #00468b !important; /* Change this color to whatever you prefer */
+      }
+      .sidebar-nav-item {
+        color: #fff !important; /* This changes the text color of the navigation items */
+      }
+      .sidebar-nav-item:hover {
+        text-decoration: none;
+        opacity: 0.8;
+      }
+    </style>
+    <!-- End style headshot -->
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+      <a class="sidebar-nav-item" href="/portfolio-optimization">Portfolio Optimization</a>
+      <a class="sidebar-nav-item" href="/ab-testing-project">A/B Testing Project</a>
+      <a class="sidebar-nav-item" href="/forms-module">Forms for Procurement</a>
+      <a class="sidebar-nav-item" href="/spend-analytics-visuals">Spend Analytics Visuals</a>
+      <a class="sidebar-nav-item" href="/website-redesign">Website Redesign</a>
+      <a class="sidebar-nav-item" href="/blogs-content">Blogs & Content</a>
+      <a class="sidebar-nav-item" href="/adventures">Adventures</a>
+
+      
+    </nav>
+
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">A/B Testing Project <a href='https://github.com/eleanorfleming96/Portfolio/blob/main/AB%20Test%20Project/ABTestProject.ipynb' target='_blank'>[GitHub]</a></h1>
+  <blockquote>
+  <p>In this personal project (December 2024), I explore how A/B testing can drive product decisions. Using test data from a B2C company like AllTrails, I examine how a small feature change in the user interface can influence engagement, retention, and conversion, and propose actionable next steps for further investigation.</p>
+
+</blockquote>
+
+<h2 id="experiment-design---effectiveness-of-live-share-feature-on-home-screen">Experiment Design - Effectiveness of Live Share Feature on Home Screen</h2>
+
+<div style="display: flex; justify-content: left; gap: 150px;">
+    <div style="text-align: left; width: 1100px;">
+        <img src="/public/images/control_and_test.png" alt="Control and Test Group" width="100%" />
+        <p style="margin-bottom: 20px;"></p>
+    </div>
+</div>
+
+<ul>
+  <li><strong>Control Group</strong>: Users follow the current workflow for activating “Live Share,” by selecting a route, clicking the map, followed by ‘Live Share’.</li>
+  <li><strong>Test Group</strong>: Users experience fewer clicks to access “Live Share,” by directly tapping the “Live Share” button on the home screen.</li>
+  <li><strong>Period</strong>: Jan 1, 2024, to March 31, 2024</li>
+  <li><strong>Randomization</strong>: Users randomly assigned to Control or Test groups to ensure balanced distributions</li>
+  <li><strong>Target Audience</strong>: Existing AllTrails free and paid tier members.</li>
+</ul>
+
+<hr />
+
+<h2 id="data-tables">Data Tables</h2>
+
+<iframe width="560" height="315" src="https://dbdiagram.io/e/67783bed5406798ef73a3d29/67783bf85406798ef73a3ddf"> </iframe>
+
+<hr />
+
+<h2 id="objective">Objective</h2>
+
+<p>This mock A/B test examines the impact of relocating the “Live Share” feature to the home screen of a B2C product, modeled on a platform like AllTrails. The “Live Share” feature enables users to share their real-time location and activity with others during outdoor adventures, enhancing collaboration and safety.</p>
+
+<ul>
+  <li>Free-tier members: The feature is available for up to five uses, after which it is removed from the app menu.</li>
+  <li>Premium members: The feature remains accessible at all times.</li>
+</ul>
+
+<p>The objective of this test is to determine whether making the “Live Share” feature more prominent on the home screen improves three key metrics: user engagement, retention, and conversion rates from free to premium subscriptions. The test is structured to run over a 3-month period, utilizing generated test data to simulate real-world conditions.</p>
+
+<hr />
+
+<h2 id="hypothesis">Hypothesis</h2>
+
+<p>Relocating “Live Share” to the home screen is expected to:</p>
+
+<ol>
+  <li>Enhance its visibility and ease of access, resulting in higher engagement from both free and premium users during the test period.</li>
+  <li>Encourage users who engage with the feature at least once to reuse it more frequently, improving retention as measured by repeated usage within 7-day and 30-day intervals.</li>
+  <li>Prompt free-tier users to reach their 5-use limit faster, creating a sense of urgency and driving an increase in premium subscription conversions.</li>
+</ol>
+
+<hr />
+
+<h2 id="key-metrics">Key Metrics</h2>
+
+<ol>
+  <li>
+    <p><strong>Engagement Rate</strong>: The percentage of users who interact with “Live Share” during test period. Helps measures immediate effect of highlighting the feature on user engagement.</p>
+  </li>
+  <li>
+    <p><strong>Retention Rate</strong>: The percentage of users who interact with the “Live Share” feature that have continued to use the feature. Helps measure the stickiness of the feature on long-term usage.</p>
+  </li>
+  <li>
+    <p><strong>Conversion Rate</strong>: The percentage of users that interacted with the “Live Share” feature and upgraded to premium during test period. Helps assess the impact of the feature on monetization.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="results">Results</h2>
+
+<!-- EMBED THE HTML CHART -->
+<style>
+iframe {
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    height: 400px;
+}
+.chart-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.chart-container > div {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.single-chart {
+    margin-top: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+</style>
+
+<div class="chart-container">
+    <div>
+        <iframe src="/public/charts/engagement_rates.html"></iframe>
+    </div>
+    <div>
+        <iframe src="/public/charts/conversion_rates.html"></iframe>
+    </div>
+</div>
+<div class="single-chart">
+    <iframe src="/public/charts/retention_rates.html"></iframe>
+</div>
+<!-- END EMBEDDING THE HTML CHART -->
+
+<hr />
+
+<h2 id="recommendations">Recommendations</h2>
+
+<p>Moving the “Live Share” feature to the home screen significantly increased engagement and conversion rates. More users interacted with the feature, and a higher percentage upgraded to premium. Retention, measured as users returning to use the feature again, also improved but to a lesser extent.</p>
+
+<p>The 5 free uses act as an effective trial, and making the feature more visible led free-tier users to hit the limit faster, driving premium conversions. This explains the strong gains in engagement and conversion rates.</p>
+
+<p>However, the smaller increase in retention suggests the feature drives initial use and upgrades but is less effective at encouraging long-term, repeated use. Free-tier users hitting the usage cap may also limit retention unless they convert.</p>
+
+<p>Implementing this change permanently would capitalize on the increased engagement and conversions. However, the modest improvements in feature reuse suggest further exploration of strategies to sustain long-term retention.</p>
+
+<h3 id="future-testing-ideas">Future Testing Ideas</h3>
+
+<h3 id="1-retention-analysis">1. Retention Analysis</h3>
+
+<blockquote>
+  <p><strong>Goal</strong>: Understand factors influencing repeated use of the feature.</p>
+
+  <p><strong>Approach</strong>: Analyze user groups based on their joining date and interactions with the feature. Evaluate patterns in session duration (<code class="language-plaintext highlighter-rouge">duration_minutes</code>) and the number of people users share their activity with (<code class="language-plaintext highlighter-rouge">shared_with_count</code>) to identify what drives repeated feature usage.</p>
+
+  <p><strong>Potential Outcome</strong>: Users who share their location with more than three people may be more likely to reuse the feature. Hikers with longer sessions (e.g., over 90 minutes) may show higher repeat usage, suggesting that retention efforts could target long-duration users with tailored messaging or nudges.</p>
+</blockquote>
+
+<h3 id="2-first-time-feature-use">2. First-Time Feature Use</h3>
+
+<blockquote>
+  <p><strong>Goal</strong>: Measure and reduce the time from sign-up to first interaction with the feature.</p>
+
+  <p><strong>Approach</strong>: Track how long it takes new users to use the feature for the first time. Test different onboarding experiences or prompts to encourage earlier engagement.</p>
+
+  <p><strong>Potential Outcome</strong>: If most users delay using the feature for more than two weeks, this could indicate the need for better education or visibility during onboarding. Early engagement (e.g., within the first week) may correlate with a higher likelihood of repeated use, suggesting a key time window for promoting the feature.</p>
+</blockquote>
+
+<h3 id="3-engagement-nudges">3. Engagement Nudges</h3>
+
+<blockquote>
+  <p><strong>Goal</strong>: Encourage more frequent use of the feature.</p>
+
+  <p><strong>Approach</strong>: Analyze the duration of use (<code class="language-plaintext highlighter-rouge">duration_minutes</code>) and activity date (<code class="language-plaintext highlighter-rouge">event_date</code>) to understand when users drop off in their interactions with the feature.</p>
+
+  <p><strong>Potential Outcome</strong>: Users may be more likely to use the feature on weekends, so weekday reminders (e.g., “Plan your next hike now!”) could drive engagement during slower periods. Hikers who receive prompts tied to their location (e.g., near a popular trailhead) may engage more frequently with “Live Share.”</p>
+</blockquote>
+
+<h3 id="4-deeper-conversion-analysis">4. Deeper Conversion Analysis</h3>
+
+<blockquote>
+  <p><strong>Goal</strong>: Understand behaviors that lead users to upgrade to premium.</p>
+
+  <p><strong>Approach</strong>: Study user activity before upgrading, including how often they use “Live Share” and other app features (<code class="language-plaintext highlighter-rouge">feature</code>, <code class="language-plaintext highlighter-rouge">duration_minutes</code>, <code class="language-plaintext highlighter-rouge">event_date</code>). Look for patterns, such as whether users who interact with social features like comments or reviews are more likely to subscribe.</p>
+
+  <p><strong>Potential Outcome</strong>: Premium conversion rates might be higher for users who interact with multiple app features (e.g., viewing reviews, commenting), indicating the importance of promoting complementary functionalities alongside “Live Share.”</p>
+</blockquote>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

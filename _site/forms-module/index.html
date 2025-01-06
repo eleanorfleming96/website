@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-us" class="theme-base-0d">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      
+        Forms for Procurement &middot; Eleanor Fleming
+      
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky" style="position: relative; top: -40px;">
+    <!-- Add Headshot Image -->
+    <img src="/public/images/headshot_zoomed_2.png" alt="Eleanor Fleming" class="headshot">
+    <!-- End Headshot Image -->
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Eleanor Fleming
+        </a>
+      </h1>
+      <p class="lead">Product Manager</p>
+    </div>
+
+    <!-- Style headshot -->
+    <style>
+      .headshot {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        top: -20px;
+        margin: 20px 100px 10px auto; /* Using auto for left/right margins to center */
+        object-fit: cover;
+        object-position: center;
+      }
+      .sidebar-sticky {
+        top: 0 !important;
+      }
+      .sidebar {
+        background-color: #00468b !important; /* Change this color to whatever you prefer */
+      }
+      .sidebar-nav-item {
+        color: #fff !important; /* This changes the text color of the navigation items */
+      }
+      .sidebar-nav-item:hover {
+        text-decoration: none;
+        opacity: 0.8;
+      }
+    </style>
+    <!-- End style headshot -->
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+      <a class="sidebar-nav-item" href="/portfolio-optimization">Portfolio Optimization</a>
+      <a class="sidebar-nav-item" href="/ab-testing-project">A/B Testing Project</a>
+      <a class="sidebar-nav-item" href="/forms-module">Forms for Procurement</a>
+      <a class="sidebar-nav-item" href="/spend-analytics-visuals">Spend Analytics Visuals</a>
+      <a class="sidebar-nav-item" href="/website-redesign">Website Redesign</a>
+      <a class="sidebar-nav-item" href="/blogs-content">Blogs & Content</a>
+      <a class="sidebar-nav-item" href="/adventures">Adventures</a>
+
+      
+    </nav>
+
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Forms for Procurement</h1>
+  <blockquote>
+  <p>At <a href="https://www.airflip.com" target="_blank">Airflip</a> in September 2024, I spearheaded the development of a specialized forms module tailored for procurement teams. This simplified PRD showcases my ability to transform business requirements into an intuitive, user-centric solution.</p>
+
+</blockquote>
+
+<div style="display: flex; justify-content: left; gap: 150px;">
+    <div style="text-align: left; width: 1100px;">
+        <img src="/public/images/forms.gif" alt="Forms Module Demo" width="100%" />
+        <p style="margin-bottom: 20px;"></p>
+    </div>
+</div>
+
+<h2 id="problem-statement">Problem Statement</h2>
+
+<p>Procurement teams struggled with fragmented data collection and stakeholder management processes for two main workflows: performance reviews and renewals.</p>
+
+<p><strong>Performance Reviews:</strong>
+A structured process where procurement teams gather multi-stakeholder feedback on supplier performance. Stakeholders independently evaluate suppliers across key metrics like quality, responsiveness, and SLA compliance. This consolidated feedback creates a comprehensive assessment of supplier relationships and helps identify areas for improvement.</p>
+
+<p><strong>Renewals:</strong>
+A dynamic workflow for managing supplier contract renewals that centralizes critical information from multiple sources. This includes tracking contract terms, maintaining updated contact information, and collecting stakeholder inputs throughout the contract lifecycle. The process ensures all relevant data is readily available when making renewal decisions.</p>
+
+<h2 id="pain-points">Pain Points</h2>
+
+<p>Traditional tools failed to address these workflows in a few ways:</p>
+
+<p><strong>Fragmented Processes &amp; Manual Work:</strong> Teams relied heavily on spreadsheets and disconnected systems to manage vendor submissions and feedback. This resulted in:</p>
+
+<ul>
+  <li>Constant data transfer between systems</li>
+  <li>Increased risk of errors</li>
+  <li>Time wasted on repetitive tasks</li>
+  <li>Inconsistent data across platforms</li>
+</ul>
+
+<p><strong>Limited Customization:</strong> Generic form builders couldn’t accommodate procurement-specific needs, lacking:</p>
+
+<ul>
+  <li>Specialized field types for procurement data</li>
+  <li>Dynamic calculations for contract terms</li>
+  <li>Real-time integration with deal profiles (Airflip entities that track deal progress)</li>
+  <li>Complex conditional logic for filling, hiding, requiring certain fields.</li>
+</ul>
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="1-flexible-workflows-for-creating-and-assigning-forms">1. Flexible Workflows for Creating and Assigning Forms</h3>
+
+<p><a href="/public/images/formsSpec.png" target="_blank">
+  <img src="/public/images/formsSpec.png" alt="Forms Module Spec" style="max-width: 100%; cursor: pointer;" />
+</a></p>
+
+<ul>
+  <li><strong>Bi-directional Record Linking</strong>:
+Forms feature bi-directional data connections with Deal and Supplier entities - Deals represent individual negotiations (Salesforce may have 3 active deals ongoing), while Suppliers represent consolidated vendor information (all associated supplier information for active and past vendors).
+    <blockquote>
+      <p>Example: When creating a supplier performance review form, imagine a “Supplier Contact Information” field. Instead of manually typing in the supplier’s email and phone number, the field automatically populates with current contact details from the linked Supplier record (e.g., pulling in “sarah.jones@abc.com” and “555-0123” from ABC Corp’s supplier profile). If the user updates this contact information while filling out the form, the submission will also update the master supplier record, ensuring all future forms have the correct contact details.</p>
+
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Single &amp; Multi-Submission Forms:</strong></p>
+
+    <p><strong>Multi-Submission Forms:</strong> Used for collecting independent feedback, such as supplier performance reviews.</p>
+    <blockquote>
+      <p>Example: Users in operations, legal, and finance each provide a numeric rating and justification for DocuSign. Procurement reviews each of these submissions to understand DocuSign’s performance.</p>
+
+    </blockquote>
+
+    <p><strong>Single-Submission Forms:</strong> Collaborative workflows where inputs from various stakeholders are consolidated into one submission, such as for contract renewals.</p>
+    <blockquote>
+      <p>Example: A renewal form gathers contract updates and approval justifications into a single document for procurement to review the DocuSign renewal.</p>
+
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="2-customizable-data-model">2. Customizable Data Model</h3>
+
+<p><a href="/public/images/formsUI.png" target="_blank">
+  <img src="/public/images/formsUI.png" alt="Forms Module UI" style="max-width: 50%; cursor: pointer;" />
+</a></p>
+
+<ul>
+  <li><strong>Dynamic Layouts:</strong><br />
+Customizable form sections and field types (e.g., text, dropdowns, dates, people) to match procurement needs.
+    <blockquote>
+      <p>Example: Fields like ‘People’ and ‘Suppliers’ can sync with Airflip’s supplier directory and existing HRIS integration to provide autocomplete suggestions.</p>
+    </blockquote>
+  </li>
+  <li><strong>Integrated Data:</strong><br />
+Each field can be configured to either pull live data from an Airflip entity (e.g., a supplier or deal) or update an entity with new information provided by the user upon form submission.
+    <blockquote>
+      <p>Example: A renewal form can display the current contact information for a supplier, allow the user to update it, and automatically save the changes to the supplier’s record. The updated contact information will then appear correctly in future forms.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="3-rules-engine-for-automation">3. Rules Engine for Automation</h3>
+
+<p><a href="/public/images/rules.png" target="_blank">
+  <img src="/public/images/rules.png" alt="Forms Module UI" style="max-width: 80%; cursor: pointer;" />
+</a></p>
+
+<ul>
+  <li>
+    <p><strong>No-Code Rule Builder:</strong> Easily define conditional logic and drag and drop rules to define rule hierarchies. Have the ability to preview rules in real-time.</p>
+  </li>
+  <li>
+    <p><strong>Automation Features:</strong></p>
+    <ul>
+      <li>Show or hide fields based on user input.</li>
+      <li>Require fields to be filled.</li>
+      <li>Perform calculations automatically.</li>
+      <li>Enforce validation to prevent errors.
+        <blockquote>
+          <p>Example: In a supplier evaluation form, if the user selects “Poor Performance” as a rating, additional fields appear to provide details on specific issues. If “Excellent Performance” is selected, those fields remain hidden to keep the form concise.</p>
+
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,35 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      rouge
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Eleanor Fleming
+tagline:          'Product Portfolio'
+description:      "Product professional focused on user-centered design"
+
+# URL settings
+url:              ""
+baseurl:          ""
+
+# Theme settings
+remote_theme:     poole/hyde
+
+# Build settings
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-remote-theme
+
+paginate:         5
+paginate_path:    "/blog/page:num/"
+
+# Custom vars
+version:          1.0.0
+github:
+  repo:           https://github.com/eleanorfleming96/eleanorfleming96

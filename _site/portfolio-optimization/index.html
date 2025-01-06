@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-us" class="theme-base-0d">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      
+        Portfolio Optimization &middot; Eleanor Fleming
+      
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky" style="position: relative; top: -40px;">
+    <!-- Add Headshot Image -->
+    <img src="/public/images/headshot_zoomed_2.png" alt="Eleanor Fleming" class="headshot">
+    <!-- End Headshot Image -->
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Eleanor Fleming
+        </a>
+      </h1>
+      <p class="lead">Product Manager</p>
+    </div>
+
+    <!-- Style headshot -->
+    <style>
+      .headshot {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        top: -20px;
+        margin: 20px 100px 10px auto; /* Using auto for left/right margins to center */
+        object-fit: cover;
+        object-position: center;
+      }
+      .sidebar-sticky {
+        top: 0 !important;
+      }
+      .sidebar {
+        background-color: #00468b !important; /* Change this color to whatever you prefer */
+      }
+      .sidebar-nav-item {
+        color: #fff !important; /* This changes the text color of the navigation items */
+      }
+      .sidebar-nav-item:hover {
+        text-decoration: none;
+        opacity: 0.8;
+      }
+    </style>
+    <!-- End style headshot -->
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+      <a class="sidebar-nav-item" href="/portfolio-optimization">Portfolio Optimization</a>
+      <a class="sidebar-nav-item" href="/ab-testing-project">A/B Testing Project</a>
+      <a class="sidebar-nav-item" href="/forms-module">Forms for Procurement</a>
+      <a class="sidebar-nav-item" href="/spend-analytics-visuals">Spend Analytics Visuals</a>
+      <a class="sidebar-nav-item" href="/website-redesign">Website Redesign</a>
+      <a class="sidebar-nav-item" href="/blogs-content">Blogs & Content</a>
+      <a class="sidebar-nav-item" href="/adventures">Adventures</a>
+
+      
+    </nav>
+
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Portfolio Optimization <a href='https://github.com/eleanorfleming96/Portfolio/blob/main/Optimization.ipynb' target='_blank'>[GitHub]</a></h1>
+  <blockquote>
+  <p>At <a href="https://www.blackrock.com/aladdin" target="_blank">BlackRock</a> from January 2022 to October 2022, I worked with 10+ enterprise clients to optimize their fixed income and equity portfolios using the Aladdin risk and trading system.</p>
+
+  <p>Below, I walk through a streamlined example of portfolio optimization to demonstrate the analytical approaches and strategies used to align client objectives with real-world constraints. If you need a refresher on what optimization is, jump down <a href="#what-is-optimization">to this section</a>.</p>
+
+</blockquote>
+
+<hr />
+<h2 id="solution-overview">Solution Overview</h2>
+
+<p>In our final example, we combine risk minimization with ESG (Environmental, Social, and Governance) maximization for a 3-security, fully invested, long-only portfolio.</p>
+
+<p>The left chart illustrates changes in risk, while the right chart shows ESG performance. We can compare the baseline allocation (blue marker) to the optimized solution (black marker).
+<!-- EMBED THE HTML CHART --></p>
+<style>
+iframe {
+    border: none;
+    box-shadow: none;
+}
+.chart-container {
+    display: flex;
+    gap: 20px;
+}
+.chart-container > div {
+    flex: 1;
+}
+</style>
+
+<div class="chart-container">
+    <div>
+        <iframe src="/public/charts/2.html" width="100%" height="600px"></iframe>
+    </div>
+    <div>
+        <iframe src="/public/charts/3.html" width="100%" height="600px"></iframe>
+    </div>
+</div>
+<!-- END EMBEDDING THE HTML CHART -->
+<p>The optimized solution removes Asset C and allocates the portfolio equally between Assets A and B (50/50), striking a more favorable balance between ESG and risk.</p>
+
+<p>In the sections below, we’ll build up to this result step by step.</p>
+
+<h2 id="example-1-minimizing-portfolio-risk">Example 1: Minimizing Portfolio Risk</h2>
+
+<p>Imagine you currently own a mix of three stocks. <strong>Current Weight</strong> represents your initial allocation to each stock. Your goal is to populate the <strong>New Weight</strong> column <code class="language-plaintext highlighter-rouge">x₁, x₂, x₃</code> by adjusting how much money you have invested in each stock (by buying more or selling some) to reduce the overall risk of your portfolio.</p>
+
+<p>In this analysis, <strong>Risk/Volatility</strong> is measured using the standard deviation of individual asset returns. Standard deviation quantifies the volatility of each asset independently, providing a straightforward measure of risk.</p>
+
+<blockquote>
+  <p>In a real optimization example, we would use a covariance matrix to capture the relationship between assets, which is essential for accuracy. Rather than evaluating each asset’s risk in isolation, a covariance matrix accounts for how assets move in relation to one another and allows us to capture diversification effects.</p>
+
+  <p>For example, consider a utility stock and a technology stock. Utility stocks are stable and less affected by economic cycles, while technology stocks are more volatile and tied to economic growth. These two stocks may have low or negative correlation, meaning when one declines, the other might hold steady or rise. The covariance matrix captures this relationsihp.</p>
+
+</blockquote>
+
+<p>While trying to achieve the lowest risk, we have a few constraints to consider.</p>
+
+<ol>
+  <li>All your money needs to stay invested—no leftover cash. In other words, you are <strong>fully invested</strong>.</li>
+  <li>You can’t borrow stocks to sell them; you can only sell what you already own. In other words, <strong>no shorting</strong>.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Stock</strong></th>
+      <th style="text-align: left"><strong>Current Weight</strong></th>
+      <th style="text-align: left"><strong>New Weight</strong></th>
+      <th style="text-align: left"><strong>Risk/Volatility</strong></th>
+      <th style="text-align: left"><strong>Sector</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">A</td>
+      <td style="text-align: left">20%</td>
+      <td style="text-align: left">x₁</td>
+      <td style="text-align: left">20</td>
+      <td style="text-align: left">Technology</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">B</td>
+      <td style="text-align: left">30%</td>
+      <td style="text-align: left">x₂</td>
+      <td style="text-align: left">30</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">50%</td>
+      <td style="text-align: left">x₃</td>
+      <td style="text-align: left">40</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <strong>objective function</strong> for this problem is to <strong>minimize portfolio risk</strong>, expressed as:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Z(x) = 20x₁ + 30x₂ + 40x₃</code></p>
+
+<p>The <strong>constraints</strong> for this problem are:</p>
+
+<ol>
+  <li>
+    <p><strong>Remain Fully Invested</strong>:<br />
+100% of the available capital must be allocated.<br />
+<code class="language-plaintext highlighter-rouge">x₁ + x₂ + x₃ = 1</code></p>
+  </li>
+  <li>
+    <p><strong>No Shorting</strong>:<br />
+This is a long-only portfolio, in other words, there can be no negative short positions.<br />
+<code class="language-plaintext highlighter-rouge">x₁, x₂, x₃ ≥ 0</code></p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Real-world optimizations often include 5–20 additional constraints beyond the basics, such as maintaining sector exposure (e.g., 10% in technology), limiting single-stock allocations (e.g., max 10%), ensuring liquidity (e.g., 20% in liquid assets), and managing tracking error (e.g., under 2% relative to a benchmark).</p>
+
+</blockquote>
+
+<h3 id="optimal-solution">Optimal Solution</h3>
+<!-- EMBED THE HTML CHART -->
+<style>
+iframe {
+    border: none;
+    box-shadow: none;
+}
+</style>
+
+<iframe src="/public/charts/1.html" width="100%" height="600px"></iframe>
+<!-- END EMBEDDING THE HTML CHART -->
+
+<p>Unsurprisingly, the optimal solution is to allocate 100% of the portfolio to <strong>Stock A</strong>, as this is the stock with the lowest risk. This satisfies the objective of minimizing portfolio risk under the given constraints of remaining fully invested and no shorting.</p>
+
+<blockquote>
+  <p>While this example is straightforward, real-world optimization problems often involve more complex constraints that can make the case infeasible (impossible to solve). In these cases, intuitive diagnostic tools are critial to diagnose and resolve conflicting constraints efficiently.</p>
+
+  <p>Imagine a portfolio with two rules: all the funds must be fully invested (100% allocated), and no single stock can make up more than 40% of the portfolio. Now, add another rule requiring at least 70% of the portfolio to be invested in technology stocks—but the technology sector only has two stocks available. These rules clash because meeting the 70% sector requirement would force each tech stock to exceed the 40% cap.</p>
+
+  <p>To resolve this conflict, you could adjust the rules, such as raising the stock limit to 50% or lowering the sector requirement. This example shows how overly strict constraints can make optimization infeasible and often require adjustments to find a workable solution.</p>
+
+</blockquote>
+
+<hr />
+
+<h2 id="example-2-minimizing-risk-while-maximizing-esg-scores">Example 2: Minimizing Risk While Maximizing ESG Scores</h2>
+
+<p>Building on the first example, let’s now introduce a second objective: <strong>maximizing ESG (Environmental, Social, and Governance) scores</strong>, which aims to measure the sustainability and ethical impact of an investment.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Stock</strong></th>
+      <th style="text-align: left"><strong>Current Weight</strong></th>
+      <th style="text-align: left"><strong>New Weight</strong></th>
+      <th style="text-align: left"><strong>ESG Score</strong></th>
+      <th style="text-align: left"><strong>Risk/Volatility</strong></th>
+      <th style="text-align: left"><strong>Sector</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">A</td>
+      <td style="text-align: left">20%</td>
+      <td style="text-align: left">x₁</td>
+      <td style="text-align: left">10</td>
+      <td style="text-align: left">20</td>
+      <td style="text-align: left">Technology</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">B</td>
+      <td style="text-align: left">30%</td>
+      <td style="text-align: left">x₂</td>
+      <td style="text-align: left">15</td>
+      <td style="text-align: left">30</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">50%</td>
+      <td style="text-align: left">x₃</td>
+      <td style="text-align: left">20</td>
+      <td style="text-align: left">40</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The new objective is to balance minimizing portfolio risk with maximizing ESG scores. The problem setup remains the same, with the following additions:</p>
+
+<h3 id="dual-objective-optimization-problem">Dual Objective Optimization Problem</h3>
+
+<p>To balance the two objectives, we define a <strong>weighted objective function</strong>:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Z(x) = w₁ * (20x₁ + 30x₂ + 40x₃) - w₂ * (10x₁ + 15x₂ + 20x₃)</code></p>
+
+<p>Where <code class="language-plaintext highlighter-rouge">w₁</code> and <code class="language-plaintext highlighter-rouge">w₂</code> are weights that reflect the relative importance of minimizing risk and maximizing ESG scores, respectively.</p>
+
+<blockquote>
+  <p>Choosing weights in an optimization problem is not a perfect science because the relationship between objectives (e.g., maximizing ESG scores and minimizing risk) is often nonlinear, interdependent, and difficult to quantify precisely. In other words, there is no guarantee that setting <code class="language-plaintext highlighter-rouge">w１</code> = 1 and <code class="language-plaintext highlighter-rouge">w２</code> = 2 will result in achieving exactly twice the ESG improvement for a given unit of risk reduction.</p>
+
+</blockquote>
+
+<p>The weights <code class="language-plaintext highlighter-rouge">w₁</code> and <code class="language-plaintext highlighter-rouge">w₂</code> allow us to decide which goal, or objective, takes priority:</p>
+<ul>
+  <li>If <code class="language-plaintext highlighter-rouge">w₁</code> &gt; <code class="language-plaintext highlighter-rouge">w₂</code>, we want the model to prioritize minimizing risk.</li>
+  <li>If <code class="language-plaintext highlighter-rouge">w₂</code> &gt; <code class="language-plaintext highlighter-rouge">w₁</code>, we want the model prioritize maximizing ESG scores.</li>
+</ul>
+
+<p>The <strong>constraints</strong> for this problem remain the same - we need to remain <strong>fully invested and no shorting</strong>.</p>
+
+<h3 id="optimal-solution-1">Optimal Solution</h3>
+
+<p>When <code class="language-plaintext highlighter-rouge">w１</code> = 1 and <code class="language-plaintext highlighter-rouge">w２</code> = 2, we are prioritizing maximizing ESG scores over minimizing risk. This results in the following optimal solution:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Stock</strong></th>
+      <th style="text-align: left"><strong>Current Weight</strong></th>
+      <th style="text-align: left"><strong>New Weight</strong></th>
+      <th style="text-align: left"><strong>ESG Score</strong></th>
+      <th style="text-align: left"><strong>Risk/Volatility</strong></th>
+      <th style="text-align: left"><strong>Sector</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">A</td>
+      <td style="text-align: left">20%</td>
+      <td style="text-align: left">50%</td>
+      <td style="text-align: left">10</td>
+      <td style="text-align: left">20</td>
+      <td style="text-align: left">Technology</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">B</td>
+      <td style="text-align: left">30%</td>
+      <td style="text-align: left">50%</td>
+      <td style="text-align: left">15</td>
+      <td style="text-align: left">30</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">50%</td>
+      <td style="text-align: left">0%</td>
+      <td style="text-align: left">20</td>
+      <td style="text-align: left">40</td>
+      <td style="text-align: left">Energy</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- EMBED THE HTML CHART -->
+<style>
+iframe {
+    border: none;
+    box-shadow: none;
+}
+.chart-container {
+    display: flex;
+    gap: 20px;
+}
+.chart-container > div {
+    flex: 1;
+}
+</style>
+
+<div class="chart-container">
+    <div>
+        <iframe src="/public/charts/2.html" width="100%" height="600px"></iframe>
+    </div>
+    <div>
+        <iframe src="/public/charts/3.html" width="100%" height="600px"></iframe>
+    </div>
+</div>
+<!-- END EMBEDDING THE HTML CHART -->
+
+<p>While Blackrock has proprietary solvers for more complex optimization problems, in this case I used an optimization solver in Python. These solvers are designed to systematically evaluate possible allocations, finding the one that meets all constraints while achieving the best outcome for the objective function. They balance precision and efficiency to identify the optimal result.</p>
+
+<p>In this case, the solution to maximize ESG scores while minimizing risk is to sell Asset C entirely and allocate funds equally between Asset A and Asset B (50/50). This result makes snese because Asset A and B both offer higher ESG scores and lower risk compared to Asset C, making them the better choices for achieving the defined objectives.</p>
+
+<hr />
+
+<h2 id="efficient-frontier">Efficient Frontier</h2>
+
+<p>The efficient frontier is a tool in portfolio optimization that visualizes how shifting the relative importance of risk and ESG goals (by adjusting <code class="language-plaintext highlighter-rouge">w₁</code> and <code class="language-plaintext highlighter-rouge">w₂</code>) impacts your portfolio—revealing how prioritizing one objective often requires compromises in the other.</p>
+
+<p>Each point on the efficient frontier corresponds to a portfolio that:</p>
+<ol>
+  <li>Minimizes risk for a given level of ESG score, or</li>
+  <li>Maximizes ESG score for a given level of risk.</li>
+</ol>
+
+<!-- EMBED THE HTML CHART -->
+<style>
+iframe {
+    border: none;
+    box-shadow: none;
+}
+</style>
+
+<iframe src="/public/charts/4.html" width="100%" height="600px"></iframe>
+<!-- END EMBEDDING THE HTML CHART -->
+
+<p>By adjusting weights <code class="language-plaintext highlighter-rouge">w₁</code> and <code class="language-plaintext highlighter-rouge">w₂</code>, the optimization process identifies portfolios along this frontier, helping investors choose the one that aligns with their priorities. Portfolios below the efficient frontier are less efficient, as you could either achieve a higher ESG score for the same risk or lower risk for the same ESG score.</p>
+
+<blockquote>
+  <p>In practice, the efficient frontier is not just a visualization tool but a powerful way to communicate trade-offs to stakeholders. For example, compared to the initial allocation marked by the star, portfolios along the efficient frontier offer better ESG scores for the same or lower levels of risk.</p>
+
+</blockquote>
+
+<hr />
+
+<h2 id="what-is-optimization">What is Optimization?</h2>
+
+<p><strong>Optimization</strong> is the process of finding the best solution to a problem from a set of possible solutions. It involves selecting the values of certain variables (<strong>decision variables</strong>) to either:</p>
+
+<ul>
+  <li><strong>Maximize</strong> something desirable (e.g., profit, efficiency, or happiness), and/or</li>
+  <li><strong>Minimize</strong> something undesirable (e.g., cost, time, or waste),</li>
+</ul>
+
+<p>while satisfying certain <strong>constraints</strong> (rules or limits) imposed by the problem.</p>
+
+<p>Let’s apply optimization to a financial portfolio. The goal is to adjust a mix of investments (e.g., stocks or other securities) to meet specific objectives and constraints.</p>
+
+<p>Once the problem is defined, running the optimization finds the <strong>optimal mix of investments</strong> that satisfies all the requirements.</p>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
